@@ -11,8 +11,6 @@ namespace WebUI.Models
         public int ItemsPerPage { get; set; }
         public int CurrentPage { get; set; }
 
-        private int myVar;
-
         public int TotalPages
         {
             get { return (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage); }

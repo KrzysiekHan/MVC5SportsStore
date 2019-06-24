@@ -1,11 +1,10 @@
-﻿@using Domain.Entities
-@model IEnumerable<Product>
+﻿@model WebUI.Models.ProductListViewModel
 
 @{
     ViewBag.Title = "Produkty";
 }
 
-@foreach (var p in Model)
+@foreach (var p in Model.Products)
 {
     <div>
         <h3>@p.Name</h3>
