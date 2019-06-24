@@ -96,6 +96,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{b3f746df-d397-49f7-aca8-b25a3f19604b}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebUI\WebUI.csproj">
       <Project>{d68bbf35-4914-42cb-b79c-1324695adda1}</Project>
       <Name>WebUI</Name>
