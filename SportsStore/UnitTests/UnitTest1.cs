@@ -34,7 +34,7 @@ namespace UnitTests
             controller.PageSize = 3;
 
             //act
-            ProductListViewModel result = (ProductListViewModel)controller.List(null,2).Model;
+            ProductListViewModel result = (ProductListViewModel)controller.List(null, 2).Model;
 
             //assert
             Product[] prodArray = result.Products.ToArray();
@@ -83,7 +83,7 @@ namespace UnitTests
             controller.PageSize = 3;
 
             //act
-            ProductListViewModel result = (ProductListViewModel)controller.List(null,2).Model;
+            ProductListViewModel result = (ProductListViewModel)controller.List(null, 2).Model;
 
             //assert 
             PaginInfo paginInfo = result.PaginInfo;
@@ -117,6 +117,31 @@ namespace UnitTests
             Assert.AreEqual(result.Length, 2);
             Assert.IsTrue(result[0].Name == "P2" && result[0].Category == "Cat2");
             Assert.IsTrue(result[1].Name == "P4" && result[1].Category == "Cat2");
+        }
+
+        [TestMethod]
+        public void Can_Create_Categories()
+        {
+            //sprawdzenie czy kontroler usuwa duplikaty i segreguje kategorie według alfabetu
+            //arrange
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m=>m.Products).Returns(new Product[] {
+                new Product{ProductID = 1, Name = "P1", Category = "Jabłka"},
+                new Product{ProductID = 2, Name = "P2", Category = "Jabłka"},
+                new Product{ProductID = 3, Name = "P3", Category = "Śliwki"},
+                new Product{ProductID = 4, Name = "P4", Category = "Pomarańcze"}
+            });
+            NavController target = new NavController(mock.Object);
+
+            //act
+            string[] results = ((IEnumerable<string>)target.Menu().Model).ToArray();
+
+            //assert
+            Assert.AreEqual(results.Length, 3);
+            Assert.AreEqual(results[0], "Jabłka");
+            Assert.AreEqual(results[1], "Pomarańcze");
+            Assert.AreEqual(results[2], "Śliwki");
+
         }
     }
 }
