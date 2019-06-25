@@ -164,5 +164,36 @@ namespace UnitTests
             //assert
             Assert.AreEqual(categoryToSelect, result);
         }
+
+        [TestMethod]
+        public void Generate_Category_Specific_Product_Count()
+        {
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns(
+                new Product[]
+                {
+                    new Product {ProductID = 1, Name = "P1", Category = "Cat1"},
+                    new Product {ProductID = 2, Name = "P2", Category = "Cat2"},
+                    new Product {ProductID = 3, Name = "P3", Category = "Cat1"},
+                    new Product {ProductID = 4, Name = "P4", Category = "Cat2"},
+                    new Product {ProductID = 5, Name = "P5", Category = "Cat3"}
+                }
+                );
+            ProductController target = new ProductController(mock.Object);
+            target.PageSize = 3;
+
+            //act
+            int res1 = ((ProductListViewModel)target.List("Cat1").Model).PaginInfo.TotalItems;
+            int res2 = ((ProductListViewModel)target.List("Cat2").Model).PaginInfo.TotalItems;
+            int res3 = ((ProductListViewModel)target.List("Cat3").Model).PaginInfo.TotalItems;
+            int resAll = ((ProductListViewModel)target.List(null).Model).PaginInfo.TotalItems;
+
+            //assert
+            Assert.AreEqual(res1, 2);
+            Assert.AreEqual(res2, 2);
+            Assert.AreEqual(res3, 1);
+            Assert.AreEqual(resAll, 5);
+
+        }
     }
 }
