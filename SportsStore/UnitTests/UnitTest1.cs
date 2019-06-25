@@ -143,5 +143,26 @@ namespace UnitTests
             Assert.AreEqual(results[2], "Śliwki");
 
         }
+
+        [TestMethod]
+        public void Indicates_Selected_Category()
+        {
+            //sprawdzamy czy metoda menu prawidłowo dodaje informacje na temat wybranej kategorii
+            //arrange
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product{ProductID = 1, Name = "P1",Category = "Jabłka"},
+                new Product {ProductID = 4, Name = "P2",Category = "Pomarańcze"},
+            });
+
+            NavController target = new NavController(mock.Object);
+            string categoryToSelect = "Jabłka";
+
+            //act
+            string result = target.Menu(categoryToSelect).ViewBag.SelectedCategory;
+
+            //assert
+            Assert.AreEqual(categoryToSelect, result);
+        }
     }
 }
