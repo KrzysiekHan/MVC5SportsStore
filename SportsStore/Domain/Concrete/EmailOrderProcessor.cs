@@ -23,7 +23,7 @@ namespace Domain.Concrete
         public string FileAllocation = @"c:\sportstore_emails";
     }
 
-    class EmailOrderProcessor : IOrderProcessor
+    public class EmailOrderProcessor : IOrderProcessor
     {
         private EmailSettings emailSettings;
         public EmailOrderProcessor(EmailSettings settings)

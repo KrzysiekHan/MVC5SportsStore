@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Abstract
 {
-    interface IOrderProcessor
+    public interface IOrderProcessor
     {
         void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
     }
