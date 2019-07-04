@@ -12,6 +12,7 @@ namespace WebUI.Controllers
     {
         IAuthProvider authProvider;
 
+
         public AccountController(IAuthProvider auth)
         {
             authProvider = auth;
@@ -39,6 +40,24 @@ namespace WebUI.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Logout(string username)
+        {
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                authProvider.Logout();
+                LoginViewModel loginViewModel = new LoginViewModel()
+                {
+                    UserName = username
+                };
+                return View(loginViewModel);
+            }
+            else
+
+            return RedirectToAction("List", "Product");
+
         }
 
 

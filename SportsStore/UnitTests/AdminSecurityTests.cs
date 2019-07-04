@@ -52,5 +52,35 @@ namespace UnitTests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
         }
+
+        [TestMethod]
+        public void Can_Logout_Logged_User()
+        {
+            //arrange
+            Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
+            mock.Setup(m => m.Authenticate("admin", "sekret")).Returns(true);
+            AccountController target = new AccountController(mock.Object);
+
+            //act
+            ActionResult result = target.Logout("admin");
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        [TestMethod]
+        public void Cannot_Logout_Not_Logged_User()
+        {
+            //arrange
+            Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
+            mock.Setup(m => m.Authenticate("nieprawidłowyUżytkownik", "nieprawidłoweHasło")).Returns(false);
+            AccountController target = new AccountController(mock.Object);
+
+            //act
+            ActionResult result = target.Logout("");
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
     }
 }

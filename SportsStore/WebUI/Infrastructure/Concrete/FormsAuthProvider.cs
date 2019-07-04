@@ -18,5 +18,21 @@ namespace WebUI.Infrastructure.Concrete
             }
             return result;
         }
+
+        public string GetUsername(HttpContext context)
+        {
+            string cookieName = FormsAuthentication.FormsCookieName; 
+            HttpCookie authCookie = context.Request.Cookies[cookieName]; 
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); 
+            string UserName = ticket.Name; 
+            return UserName;
+        }
+
+        public void Logout()
+        {
+            FormsAuthentication.SignOut();
+        }
+
+
     }
 }
