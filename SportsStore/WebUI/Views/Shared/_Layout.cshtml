@@ -11,10 +11,7 @@
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">Sklep sportowy</a>
-        @Html.ActionLink("Panel administracyjny", "Index", "Admin", null,
-        new { @class = "btn btn-default navbar-btn" })
-        @Html.ActionLink("Wyloguj", "Logout", "Account", new { username = @User.Identity.Name},
-    new { @class = "btn btn-default navbar-btn" })
+        @Html.Action("_Nav","Account")
         @Html.Action("Summary", "Cart")
     </div>
     <div class="row panel">

@@ -60,6 +60,11 @@ namespace WebUI.Controllers
 
         }
 
+        public PartialViewResult _Nav()
+        {
+            return PartialView();
+        }
+
 
     }
 }

@@ -1,0 +1,10 @@
+﻿<ul class="nav navbar-nav navbar-right">
+    @if (@User.Identity.IsAuthenticated)
+    {
+        <li> <a href="#"><span class="text-muted" >@User.Identity.Name</span></a></li>
+        <li><a href="@Url.Action("Logout","Account",new { username = @User.Identity.Name })"><span class="glyphicon glyphicon-log-out"></span> Wyloguj </a></li>
+    } else
+    {
+        <li><a href="@Url.Action("Index","Admin")"><span class="glyphicon glyphicon-user"></span> Zaloguj </a></li>
+    }
+</ul>
