@@ -5,5 +5,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Użytkownik @Model.UserName został wylogowany ...</h2>
+<h4>Użytkownik @Model.UserName został wylogowany ...</h4>
 
+<a class="btn btn-primary" href="@Url.Action("List","Product")">Powrót</a>

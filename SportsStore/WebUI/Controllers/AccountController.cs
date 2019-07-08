@@ -65,6 +65,19 @@ namespace WebUI.Controllers
             return PartialView();
         }
 
+        public ViewResult Register()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                authProvider.RegisterUser(model.Username, model.Password);
+            }
+            return View();
+        }
     }
 }

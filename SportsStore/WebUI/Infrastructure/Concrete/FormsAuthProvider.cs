@@ -9,6 +9,12 @@ namespace WebUI.Infrastructure.Concrete
 {
     public class FormsAuthProvider : IAuthProvider
     {
+        private IAuthProvider _auth;
+        public FormsAuthProvider(IAuthProvider authProvider)
+        {
+            _auth = authProvider;
+        }
+
         public bool Authenticate(string username, string password)
         {
             bool result = FormsAuthentication.Authenticate(username, password);
@@ -33,6 +39,9 @@ namespace WebUI.Infrastructure.Concrete
             FormsAuthentication.SignOut();
         }
 
-
+        public bool RegisterUser(string username, string password)
+        {
+            return this._auth.RegisterUser(username, password);
+        }
     }
 }
