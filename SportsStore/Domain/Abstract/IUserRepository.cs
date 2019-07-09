@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Abstract
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         User GetUser(int id);
 
-        int RegisterUser(User user);
+        void RegisterUser(User user);
     }
 }

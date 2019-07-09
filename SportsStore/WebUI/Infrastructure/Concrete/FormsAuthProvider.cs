@@ -1,4 +1,6 @@
 ﻿using Domain.Abstract;
+using Domain.Concrete;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,10 @@ namespace WebUI.Infrastructure.Concrete
 {
     public class FormsAuthProvider : IAuthProvider
     {
-        private IAuthProvider _auth;
-        public FormsAuthProvider(IAuthProvider authProvider)
+        private IUserRepository _user;
+        public FormsAuthProvider(IUserRepository user )
         {
-            _auth = authProvider;
+            _user = user;
         }
 
         public bool Authenticate(string username, string password)
@@ -39,9 +41,10 @@ namespace WebUI.Infrastructure.Concrete
             FormsAuthentication.SignOut();
         }
 
-        public bool RegisterUser(string username, string password)
+        public void RegisterUser(User user)
         {
-            return this._auth.RegisterUser(username, password);
+            this._user.RegisterUser(user);
         }
+
     }
 }

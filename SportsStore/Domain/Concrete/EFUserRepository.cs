@@ -18,14 +18,23 @@ namespace Domain.Concrete
             return dbEntry;
         }
 
-        public int RegisterUser(User user)
+        public void RegisterUser(User user)
         {
            if (user.UserId == 0)
             {
-                return 1;
-                //contr
+                context.Users.Add(user);
             }
-            return 0;
+            else
+            {
+                User dbEntry = context.Users.Find(user.UserId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Username = user.Username;
+                    dbEntry.Password = user.Password;
+                }
+            }
+            context.SaveChanges();
+
         }
     }
 }

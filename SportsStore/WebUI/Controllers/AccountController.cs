@@ -1,4 +1,5 @@
 ﻿using Domain.Abstract;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,7 @@ namespace WebUI.Controllers
 {
     public class AccountController : Controller
     {
-        IAuthProvider authProvider;
-
+        private IAuthProvider authProvider;
 
         public AccountController(IAuthProvider auth)
         {
@@ -75,7 +75,13 @@ namespace WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                authProvider.RegisterUser(model.Username, model.Password);
+                User user = new User
+                {
+                    UserId = 0,
+                    Username = model.Username,
+                    Password = model.Password
+                };
+                authProvider.RegisterUser(user);
             }
             return View();
         }

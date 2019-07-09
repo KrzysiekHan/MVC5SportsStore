@@ -33,6 +33,7 @@ namespace WebUI.Infrastructure
             //    new Product { Name = "Buty do biegania", Price = 95 }
             //    });
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
+            kernel.Bind<IUserRepository>().To<EFUserRepository>();
 
             EmailSettings emailSettings = new EmailSettings
             {
