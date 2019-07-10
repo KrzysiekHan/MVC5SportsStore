@@ -82,7 +82,8 @@ namespace WebUI.Controllers
                     Password = model.Password
                 };
                 authProvider.RegisterUser(user);
-            }
+                ViewData["registerStatus"] = "OK";
+            } 
             return View();
         }
     }

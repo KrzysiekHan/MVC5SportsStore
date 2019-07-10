@@ -11,6 +11,8 @@ namespace Domain.Abstract
     {
         User GetUser(int id);
 
-        void RegisterUser(User user);
+        bool RegisterUser(User user);
+
+        bool AuthenticateUser(User user);
     }
 }

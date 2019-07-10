@@ -12,13 +12,37 @@ namespace Domain.Concrete
     {
         private EFDbContext context = new EFDbContext();
         public IEnumerable<User> Users { get { return context.Users; } }
+
+        public bool AuthenticateUser(User user)
+        {
+           using (context)
+            {
+                User dbUser = context.Users.Where(x=>x.Username == user.Username).SingleOrDefault();
+                if (dbUser != null)
+                {
+                    if (dbUser.Password == user.Password)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    return false;
+                }
+
+            }
+        }
+
         public User GetUser(int id)
         {
             User dbEntry = context.Users.Where(x=>x.UserId == id).SingleOrDefault();
             return dbEntry;
         }
 
-        public void RegisterUser(User user)
+        public bool RegisterUser(User user)
         {
            if (user.UserId == 0)
             {
@@ -34,7 +58,9 @@ namespace Domain.Concrete
                 }
             }
             context.SaveChanges();
-
+            return true;
         }
+
+
     }
 }

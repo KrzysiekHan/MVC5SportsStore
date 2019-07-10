@@ -1,5 +1,4 @@
 ﻿using Domain.Abstract;
-using Domain.Concrete;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,17 +8,17 @@ using System.Web.Security;
 
 namespace WebUI.Infrastructure.Concrete
 {
-    public class FormsAuthProvider : IAuthProvider
+    public class CustomAuthProvider:IAuthProvider
     {
         private IUserRepository _user;
-        public FormsAuthProvider(IUserRepository user )
+        public CustomAuthProvider(IUserRepository user)
         {
             _user = user;
         }
 
         public bool Authenticate(string username, string password)
         {
-            bool result = FormsAuthentication.Authenticate(username, password);
+            bool result = _user.AuthenticateUser(new User { UserId = 0, Username = username, Password = password});
             if (result)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
@@ -29,10 +28,10 @@ namespace WebUI.Infrastructure.Concrete
 
         public string GetUsername(HttpContext context)
         {
-            string cookieName = FormsAuthentication.FormsCookieName; 
-            HttpCookie authCookie = context.Request.Cookies[cookieName]; 
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value); 
-            string UserName = ticket.Name; 
+            string cookieName = FormsAuthentication.FormsCookieName;
+            HttpCookie authCookie = context.Request.Cookies[cookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            string UserName = ticket.Name;
             return UserName;
         }
 
@@ -45,6 +44,5 @@ namespace WebUI.Infrastructure.Concrete
         {
             return this._user.RegisterUser(user);
         }
-
     }
 }

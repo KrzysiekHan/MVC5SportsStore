@@ -10,7 +10,7 @@ namespace Domain.Abstract
 {
    public interface IAuthProvider
     {
-        void RegisterUser(User user);
+        bool RegisterUser(User user);
 
         bool Authenticate(string username, string password);
 
