@@ -40,7 +40,7 @@ namespace WebUI.Infrastructure
                 WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
             };
 
-            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+            kernel.Bind<IOrderProcessor>().To<DbOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
 
             kernel.Bind<IAuthProvider>().To<CustomAuthProvider>();

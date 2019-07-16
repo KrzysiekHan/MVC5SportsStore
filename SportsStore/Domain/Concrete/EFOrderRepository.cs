@@ -20,9 +20,13 @@ namespace Domain.Concrete
             throw new NotImplementedException();
         }
 
-        public void SaveOrder(OrderHeader product)
+        public void SaveOrder(OrderHeader order)
         {
-            throw new NotImplementedException();
+            if (order.Id == 0)
+            {
+                context.OrderHeaders.Add(order);
+            }
+            context.SaveChanges();
         }
     }
 }
