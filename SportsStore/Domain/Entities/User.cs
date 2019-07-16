@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Domain.Entities
     public class User
     {
         [HiddenInput(DisplayValue = false)]
+        [ForeignKey("UserDetail")]
         public int UserId { get; set; }
         [Required(ErrorMessage = "Nazwa użytkownika jest wymagana")]
         public string Username { get; set; }
@@ -18,5 +20,7 @@ namespace Domain.Entities
         [Required(ErrorMessage = "Hasło jest wymagane")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public virtual UserDetail UserDetail { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace Domain.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Domain.Concrete.EFDbContext";
         }
 
         protected override void Seed(Domain.Concrete.EFDbContext context)
