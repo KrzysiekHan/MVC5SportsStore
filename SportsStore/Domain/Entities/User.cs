@@ -11,7 +11,7 @@ namespace Domain.Entities
 {
     public class User
     {
-        [HiddenInput(DisplayValue = false)]
+        
         [ForeignKey("UserDetail")]
         public int UserId { get; set; }
         [Required(ErrorMessage = "Nazwa użytkownika jest wymagana")]

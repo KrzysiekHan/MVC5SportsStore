@@ -75,11 +75,27 @@ namespace WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                UserDetail userDetail = new UserDetail
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    BuildingNr = model.BuildingNr,
+                    City = model.City,
+                    Country = model.Country,
+                    EmailAdress = model.EmailAdress,
+                    PhoneNumber = model.PhoneNumber,
+                    State = model.State,
+                    Street = model.Street,
+                    Zip = model.Zip
+                    
+                };
                 User user = new User
                 {
                     UserId = 0,
                     Username = model.Username,
-                    Password = model.Password
+                    Password = model.Password,
+                    UserDetail = userDetail
+
                 };
                 authProvider.RegisterUser(user);
                 ViewData["registerStatus"] = "OK";
