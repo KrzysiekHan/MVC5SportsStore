@@ -86,17 +86,17 @@ namespace WebUI.Controllers
                     PhoneNumber = model.PhoneNumber,
                     State = model.State,
                     Street = model.Street,
-                    Zip = model.Zip
-                    
+                    Zip = model.Zip                 
                 };
+
                 User user = new User
                 {
                     UserId = 0,
                     Username = model.Username,
                     Password = model.Password,
                     UserDetail = userDetail
-
                 };
+
                 authProvider.RegisterUser(user);
                 ViewData["registerStatus"] = "OK";
             } 

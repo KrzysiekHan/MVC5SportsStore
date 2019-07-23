@@ -1,10 +1,21 @@
 ﻿<ul class="nav navbar-nav navbar-right">
     @if (@User.Identity.IsAuthenticated)
-    {
-        <li> <a href="@Url.Action("Index","Admin")"><span class="text-muted" >@User.Identity.Name</span></a></li>
+    {       
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-user" data-toggle="tooltip" title="@User.Identity.Name" data-placement="left"></span>
+                <span class="caret"></span>
+            </a>           
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("Index","Admin")">Lista produktów</a></li>
+                <li><a href="#">Historia zakupów</a></li>
+            </ul>
+        </li>
         <li><a href="@Url.Action("Logout","Account",new { username = @User.Identity.Name })"><span class="glyphicon glyphicon-log-out"></span> Wyloguj </a></li>
-    } else
+    }
+    else
     {
         <li><a href="@Url.Action("Index","Admin")"><span class="glyphicon glyphicon-user"></span> Zaloguj </a></li>
     }
 </ul>
+

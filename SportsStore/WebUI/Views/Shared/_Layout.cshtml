@@ -7,20 +7,32 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+
+
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">Sklep sportowy</a>
-        @Html.Action("_Nav","Account")
+        @Html.Action("_Nav", "Account")
         @Html.Action("Summary", "Cart")
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">
-            @Html.Action("Menu","Nav")
+            @Html.Action("Menu", "Nav")
         </div>
         <div class="col-xs-8">
             @RenderBody()
         </div>
     </div>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
