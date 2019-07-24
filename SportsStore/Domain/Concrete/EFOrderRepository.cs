@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Concrete
 {
-    class EFOrderRepository : IOrderRepository
+    public class EFOrderRepository : IOrderRepository
     {
         private EFDbContext context = new EFDbContext();
         public IEnumerable<OrderHeader> Orders { get {

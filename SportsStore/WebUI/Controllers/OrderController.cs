@@ -12,10 +12,12 @@ namespace WebUI.Controllers
     {
         private IOrderRepository repository;
         public int PageSize = 4;
+
         public OrderController(IOrderRepository orderRepository)
         {
             this.repository = orderRepository;
         }
+
         // GET: Order
         public ViewResult List(int page = 1)
         {
