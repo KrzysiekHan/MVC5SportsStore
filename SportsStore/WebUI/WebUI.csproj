@@ -214,6 +214,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Order\List.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Account\RegisterSummary.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageEmpty.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

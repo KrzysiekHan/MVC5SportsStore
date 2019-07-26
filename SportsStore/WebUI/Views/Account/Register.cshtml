@@ -5,22 +5,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@{ 
-        if (@ViewData["registerStatus"] != null)
-    {
-    if (@ViewData["registerStatus"].ToString() == "OK")
-    {
-    <div class="row">
-        <div class="col-3">
-            <div class="btn">
-                <div class="alert-success">Zarejestrowano użytkownika</div>
-            </div>        
-        </div>
-    </div>
-    }
-    }
-}
-
 <div class="panel">
     <div class="panel-heading">
         <h3>Rejestracja użytkownika</h3>

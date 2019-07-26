@@ -77,6 +77,7 @@
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\DbOrderProcessor.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFInitializer.cs" />
     <Compile Include="Concrete\EFOrderRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFUserRepository.cs" />
@@ -91,6 +92,10 @@
     <Compile Include="Migrations\201907161320370_initial.cs" />
     <Compile Include="Migrations\201907161320370_initial.Designer.cs">
       <DependentUpon>201907161320370_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907261250429_join order detail with product.cs" />
+    <Compile Include="Migrations\201907261250429_join order detail with product.Designer.cs">
+      <DependentUpon>201907261250429_join order detail with product.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +164,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907161320370_initial.resx">
       <DependentUpon>201907161320370_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907261250429_join order detail with product.resx">
+      <DependentUpon>201907261250429_join order detail with product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

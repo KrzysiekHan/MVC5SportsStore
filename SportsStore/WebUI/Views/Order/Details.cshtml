@@ -19,7 +19,7 @@
             @foreach (var item in @Model.orderHeader.OrderDetail)
             {
         <tr>
-            <td>@item.ProductId</td>
+            <td>@item.Product.Name</td>
             <td>@item.Quantity</td>
             <td>@item.UnitPrice</td>
             <td>@string.Format("{0:P2}",item.UnitPriceDiscount)</td>

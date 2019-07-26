@@ -42,7 +42,7 @@ namespace Domain.Concrete
                     Quantity = line.Quantity,
                     UnitPrice = line.Product.Price,
                     UnitPriceDiscount = 0.05M,
-                    ProductId = line.Product.ProductID,
+                    Product = line.Product,
                     LineTotal = line.Product.Price * line.Quantity - (line.Product.Price * line.Quantity * 0.05M),
                 };
                 order.OrderDetail.Add(detail);

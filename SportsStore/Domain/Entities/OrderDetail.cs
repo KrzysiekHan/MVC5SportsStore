@@ -17,7 +17,7 @@ namespace Domain.Entities
 
         public int OrderId { get; set; }
 
-        public int ProductId { get; set; }
+        //public int ProductId { get; set; }
 
         public int Quantity { get; set; }
 
@@ -32,5 +32,6 @@ namespace Domain.Entities
 
         public virtual OrderHeader OrderHeader { get; set; }
 
+        public virtual Product Product { get; set; }
     }
 }

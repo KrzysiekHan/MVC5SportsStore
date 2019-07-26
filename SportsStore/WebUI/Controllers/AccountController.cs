@@ -98,7 +98,7 @@ namespace WebUI.Controllers
                 };
 
                 authProvider.RegisterUser(user);
-                ViewData["registerStatus"] = "OK";
+                return View("RegisterSummary");
             } 
             return View();
         }
