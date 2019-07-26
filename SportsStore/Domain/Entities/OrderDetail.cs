@@ -31,5 +31,6 @@ namespace Domain.Entities
         public decimal LineTotal { get; set; }
 
         public virtual OrderHeader OrderHeader { get; set; }
+
     }
 }

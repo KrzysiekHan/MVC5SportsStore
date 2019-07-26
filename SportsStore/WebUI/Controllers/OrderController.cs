@@ -38,6 +38,13 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        public ActionResult Details (int id)
+        {
+            OrderDetailsViewModel model = new OrderDetailsViewModel();
+            model.orderHeader = repository.Orders.FirstOrDefault(x => x.Id == id);
+            return View(model);
+        }
+
 
     }
 }
