@@ -1,41 +1,17 @@
-﻿@model Domain.Entities.ShippingDetails
+﻿@model Domain.Entities.User
 
 @{
     ViewBag.Title = "Sklep sportowy : wysyłka";
 }
 
-<h2>Wysyłka</h2>
-<p>Proszę podać swoje dane, Towar zostanie wkrótce wysłany  </p>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { User = Model }))
 {
     @Html.ValidationSummary()
-    <h3>Wysyłka dla</h3>
-    <div class="form-group">
-        <label>Nazwisko:</label>
-        @Html.TextBoxFor(x=> x.Name, new { @class = "form-control"})
-    </div>
+<h3>Sprawdź dane do wysyłki i potwierdź zamówienie</h3>
+<h5>@Model.UserDetail.FirstName @Model.UserDetail.LastName </h5>
+<h5>@Model.UserDetail.City @Model.UserDetail.Zip </h5>
+<h5>@Model.UserDetail.Street @Model.UserDetail.BuildingNr</h5>
 
-    <h3>Adres</h3>
-    foreach (var property in ViewData.ModelMetadata.Properties)
-    {
-        if (property.PropertyName != "Name" && property.PropertyName != "GiftWrap")
-        {
-            <div class="form-group">
-                <label>@(property.DisplayName??property.PropertyName)</label>
-                @Html.TextBox(property.PropertyName, null, new { @class = "form-control"})
-            </div>
-        }
-    }
-
-    <h3>Opcje</h3>
-
-    <div class="checkbox">
-        <label>
-            @Html.EditorFor(x=>x.GiftWrap)
-            Zapakować jako prezent
-        </label>
-    </div>
 
     <div class="text-center">
         <input class="btn btn-primary" type="submit" value="Zakończ realizację zamówienia" />

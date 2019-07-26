@@ -81,7 +81,6 @@
     <Compile Include="Concrete\EFOrderRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFUserRepository.cs" />
-    <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\OrderHeader.cs" />

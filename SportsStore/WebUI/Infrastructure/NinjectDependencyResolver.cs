@@ -25,24 +25,10 @@ namespace WebUI.Infrastructure
 
         private void AddBindings()
         {
-            //tutaj umieszczamy dodatkowe powiązania
-            //Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            //mock.Setup(m => m.Products).Returns(new List<Product>{
-            //    new Product { Name = "Piłka nożna", Price = 25 },
-            //    new Product { Name = "Deska surfingowa", Price = 179 },
-            //    new Product { Name = "Buty do biegania", Price = 95 }
-            //    });
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
             kernel.Bind<IUserRepository>().To<EFUserRepository>();
             kernel.Bind<IOrderRepository>().To<EFOrderRepository>();
-            EmailSettings emailSettings = new EmailSettings
-            {
-                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
-            };
-
-            kernel.Bind<IOrderProcessor>().To<DbOrderProcessor>()
-                .WithConstructorArgument("settings", emailSettings);
-
+            kernel.Bind<IOrderProcessor>().To<DbOrderProcessor>();
             kernel.Bind<IAuthProvider>().To<CustomAuthProvider>();
         }
 

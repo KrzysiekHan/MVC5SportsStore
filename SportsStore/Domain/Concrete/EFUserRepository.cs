@@ -42,6 +42,12 @@ namespace Domain.Concrete
             return dbEntry;
         }
 
+        public User GetUserByName(string name)
+        {
+            User dbEntry = context.Users.Where(x => x.Username == name).SingleOrDefault();
+            return dbEntry;
+        }
+
         public bool RegisterUser(User user)
         {
            if (user.UserId == 0)

@@ -3,6 +3,7 @@ using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using WebUI.Models;
@@ -13,11 +14,15 @@ namespace WebUI.Controllers
     {
         private IProductRepository repository;
         private IOrderProcessor orderProcessor;
+        private IUserRepository userRepository;
 
-        public CartController(IProductRepository repo, IOrderProcessor proc)
+        public CartController(IProductRepository repo, 
+            IOrderProcessor proc,
+            IUserRepository userRepo)
         {
             repository = repo;
             orderProcessor = proc;
+            userRepository = userRepo;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -58,12 +63,14 @@ namespace WebUI.Controllers
 
         public ViewResult Checkout()
         {
-            return View(new ShippingDetails());
+            User user = userRepository.GetUserByName(User.Identity.Name);
+            return View(user);
         }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart,ShippingDetails shippingDetails)
+        public ViewResult Checkout(Cart cart)
         {
+            User user = userRepository.GetUserByName(User.Identity.Name);
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Koszyk jest pusty!");
@@ -71,14 +78,14 @@ namespace WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                orderProcessor.ProcessOrder(cart, shippingDetails);
+                orderProcessor.ProcessOrder(cart, user);
 
                 cart.Clear();
                 return View("Completed");
             }
             else
             {
-                return View(shippingDetails);
+                return View(new ShippingDetails());
             }
         }
     }

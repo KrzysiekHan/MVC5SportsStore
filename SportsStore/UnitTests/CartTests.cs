@@ -125,7 +125,7 @@ namespace UnitTests
             }.AsQueryable());
 
             Cart cart = new Cart();
-            CartController target = new CartController(mock.Object,null);
+            CartController target = new CartController(mock.Object,null,null);
 
             //act 
             target.AddToCart(cart, 1, null);
@@ -146,7 +146,7 @@ namespace UnitTests
             }.AsQueryable());
 
             Cart cart = new Cart();
-            CartController target = new CartController(mock.Object,null);
+            CartController target = new CartController(mock.Object,null,null);
 
             //act
             RedirectToRouteResult result = target.AddToCart(cart, 2, "myUrl");
@@ -162,7 +162,7 @@ namespace UnitTests
         {
             //arrange
             Cart cart = new Cart();
-            CartController target = new CartController(null,null);
+            CartController target = new CartController(null,null,null);
 
             //act
             CartIndexViewModel result = (CartIndexViewModel)target.Index(cart, "myUrl").ViewData.Model;
@@ -178,14 +178,14 @@ namespace UnitTests
             //arrange
             Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
             Cart cart = new Cart();
-            ShippingDetails shippingDetails = new ShippingDetails();
-            CartController target = new CartController(null, mock.Object);
+            User user = new User();
+            CartController target = new CartController(null, mock.Object,null);
 
             //act
-            ViewResult result = target.Checkout(cart, shippingDetails);
+            ViewResult result = target.Checkout(cart);
 
             //assert
-            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()),
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<User>()),
                Times.Never());
 
             Assert.AreEqual("", result.ViewName);
@@ -200,14 +200,14 @@ namespace UnitTests
             Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
             Cart cart = new Cart();
             cart.AddItem(new Product(), 1);
-            CartController target = new CartController(null, mock.Object);
+            CartController target = new CartController(null, mock.Object,null);
             target.ModelState.AddModelError("error", "error");
 
             //act
-            ViewResult result = target.Checkout(cart, new ShippingDetails());
+            ViewResult result = target.Checkout(cart);
 
             //assert
-            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()),
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<User>()),
                 Times.Never());
 
             Assert.AreEqual("", result.ViewName);
@@ -222,12 +222,12 @@ namespace UnitTests
             Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
             Cart cart = new Cart();
             cart.AddItem(new Product(), 1);
-            CartController target = new CartController(null, mock.Object);
+            CartController target = new CartController(null, mock.Object,null);
 
             //act 
-            ViewResult result = target.Checkout(cart, new ShippingDetails());
+            ViewResult result = target.Checkout(cart);
 
-            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()),
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<User>()),
                 Times.Once());
 
             Assert.AreEqual("Completed", result.ViewName);

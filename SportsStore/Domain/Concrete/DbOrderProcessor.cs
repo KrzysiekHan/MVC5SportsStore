@@ -11,17 +11,14 @@ namespace Domain.Concrete
     public class DbOrderProcessor : IOrderProcessor
     {
         private EFOrderRepository repo = new EFOrderRepository();
-        public void ProcessOrder(Cart cart, ShippingDetails shippingInfo)
+        public void ProcessOrder(Cart cart, User user)
         {
             StringBuilder address = new StringBuilder();
-            address.AppendLine(shippingInfo.Name)
-    .AppendLine(shippingInfo.Line1)
-    .AppendLine(shippingInfo.Line2 ?? "")
-    .AppendLine(shippingInfo.Line3 ?? "")
-    .AppendLine(shippingInfo.City)
-    .AppendLine(shippingInfo.State ?? "")
-    .AppendLine(shippingInfo.Country)
-    .AppendLine(shippingInfo.Zip);
+            address.AppendLine(user.UserDetail.FirstName)
+    .AppendLine(user.UserDetail.City)
+    .AppendLine(user.UserDetail.Zip)
+    .AppendLine(user.UserDetail.Street)
+    .AppendLine(user.UserDetail.BuildingNr);
             OrderHeader order = new OrderHeader
             {
                 CustomerId = 1,
@@ -29,7 +26,7 @@ namespace Domain.Concrete
                 ShipAddress = address.ToString(),
                 ShipmentMethod = "default",
                 Status = "Ordered",
-                Comment = shippingInfo.GiftWrap ? "Gift wrap" : "",
+                //TODO Comment = shippingInfo.GiftWrap ? "Gift wrap" : "",
                 TotalDue = cart.ComputeTotalValue(),
                 OrderDetail = new List<OrderDetail>()
             };
