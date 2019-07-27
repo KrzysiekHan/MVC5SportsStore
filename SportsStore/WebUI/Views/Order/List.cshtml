@@ -23,7 +23,7 @@
                     <td>@item.ShipAddress </td>
                     <td>@item.Status </td>
                     <td>@item.Comment </td>
-                    <td>@item.TotalDue </td>
+                    <td>@string.Format("{0:C2}",item.TotalDue) </td>
                     <td>
                         <a href="@Url.Action("Details",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Szczegóły"><span class="glyphicon glyphicon-search"></span></a>
                         <a class="btn btn-default" data-toggle="tooltip" title="Zmiana zamówienia"><span class="glyphicon glyphicon-edit"></span></a>
