@@ -15,13 +15,14 @@ namespace Domain.Concrete
         {
             StringBuilder address = new StringBuilder();
             address.AppendLine(user.UserDetail.FirstName)
-    .AppendLine(user.UserDetail.City)
-    .AppendLine(user.UserDetail.Zip)
-    .AppendLine(user.UserDetail.Street)
-    .AppendLine(user.UserDetail.BuildingNr);
+                    .AppendLine(user.UserDetail.LastName)
+                    .AppendLine(user.UserDetail.City)
+                    .AppendLine(user.UserDetail.Zip)
+                    .AppendLine(user.UserDetail.Street)
+                    .AppendLine(user.UserDetail.BuildingNr);
             OrderHeader order = new OrderHeader
             {
-                CustomerId = 1,
+                CustomerId = user.UserId,
                 CreationDate = DateTime.Now,
                 ShipAddress = address.ToString(),
                 ShipmentMethod = "default",

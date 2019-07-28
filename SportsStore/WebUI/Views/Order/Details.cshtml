@@ -25,7 +25,12 @@
             <td>@string.Format("{0:P2}",item.UnitPriceDiscount)</td>
         </tr>
              }
-                
+        <tr class="bg-primary">
+            <td><b>Razem</b></td>
+            <td>@Model.orderHeader.OrderDetail.Sum(x=>x.Quantity)</td>
+            <td>@string.Format("{0:C}",Model.orderHeader.OrderDetail.Sum(x=>x.UnitPrice))</td>
+            <td></td>
+        </tr> 
             </table>
     </div>
 <p>

@@ -21,6 +21,8 @@ namespace Domain.Entities
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public string UserRole { get; set; }
+
         public virtual UserDetail UserDetail { get; set; }
     }
 }

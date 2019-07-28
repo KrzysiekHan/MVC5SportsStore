@@ -25,17 +25,11 @@ namespace Domain.Concrete
         {
             if (order.Id == 0)
             {
-                //context.Set<School>().Add(newItem);
-                // use the following statement so that City won't be inserted
-                //context.Entry(newItem.City).State = EntityState.Unchanged;
-
-                //context.OrderHeaders.Add(order);
                 context.Set<OrderHeader>().Add(order);
                 foreach (var item in order.OrderDetail)
                 {
                     context.Entry(item.Product).State = EntityState.Unchanged;
-                }
-                
+                }              
             }
             context.SaveChanges();
         }

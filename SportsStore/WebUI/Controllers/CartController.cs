@@ -70,7 +70,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public ViewResult Checkout(Cart cart)
         {
-            User user = userRepository.GetUserByName(User.Identity.Name);
+            
             if (cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Koszyk jest pusty!");
@@ -78,8 +78,8 @@ namespace WebUI.Controllers
 
             if (ModelState.IsValid)
             {
+                User user = userRepository.GetUserByName(User.Identity.Name);
                 orderProcessor.ProcessOrder(cart, user);
-
                 cart.Clear();
                 return View("Completed");
             }

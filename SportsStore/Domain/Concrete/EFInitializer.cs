@@ -79,7 +79,8 @@ namespace Domain.Concrete
                 UserId = 1,
                 Username = "admin",
                 Password = "a",
-                UserDetail = userDetail
+                UserDetail = userDetail,
+                UserRole = "admin"
             });
 
 
