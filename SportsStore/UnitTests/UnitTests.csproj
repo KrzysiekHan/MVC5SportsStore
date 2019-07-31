@@ -94,6 +94,7 @@
     <Compile Include="AdminTests.cs" />
     <Compile Include="AdminSecurityTests.cs" />
     <Compile Include="ImageTests.cs" />
+    <Compile Include="OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

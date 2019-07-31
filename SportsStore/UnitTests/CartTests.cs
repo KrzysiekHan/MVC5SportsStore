@@ -220,9 +220,11 @@ namespace UnitTests
         {
             //arrange
             Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
+            Mock<IUserRepository> mock2 = new Mock<IUserRepository>();
+            mock2.Setup(x => x.GetUserByName("admin")).Returns(new User { Username = "admin",UserId = 1, UserRole = "admin" });
             Cart cart = new Cart();
             cart.AddItem(new Product(), 1);
-            CartController target = new CartController(null, mock.Object,null);
+            CartController target = new CartController(null, mock.Object,mock2.Object);
 
             //act 
             ViewResult result = target.Checkout(cart);
