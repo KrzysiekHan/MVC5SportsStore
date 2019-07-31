@@ -3,6 +3,7 @@ using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebUI.Models;
@@ -42,10 +43,18 @@ namespace WebUI.Controllers
             return View(model);
         }
 
-        public ActionResult Details (int id)
+        public ActionResult Details (int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             OrderDetailsViewModel model = new OrderDetailsViewModel();
             model.orderHeader = repository.Orders.FirstOrDefault(x => x.Id == id);
+            if (model.orderHeader == null)
+            {
+                return HttpNotFound();
+            }
             return View(model);
         }
 

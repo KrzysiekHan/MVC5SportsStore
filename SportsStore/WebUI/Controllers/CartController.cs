@@ -24,16 +24,7 @@ namespace WebUI.Controllers
             repository = repo;
             orderProcessor = proc;
             userRepository = userRepo;
-
-            if (User?.Identity.Name != null)
-            {
-                this.CurrentUser = userRepository.GetUserByName(User.Identity.Name);
-            } else
-            //test purpose only
-            {
-                this.CurrentUser = new User();
-            }
-            
+            this.CurrentUser = new User();
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -74,7 +65,14 @@ namespace WebUI.Controllers
 
         public ViewResult Checkout()
         {
-            User user = CurrentUser;
+            User user = new User();
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                user = CurrentUser;
+            } else
+            {
+                user = userRepository.GetUserByName(User.Identity.Name);
+            }           
             return View(user);
         }
 
@@ -88,8 +86,17 @@ namespace WebUI.Controllers
             }
 
             if (ModelState.IsValid)
-            {               
-                orderProcessor.ProcessOrder(cart, CurrentUser);
+            {
+                User user = new User();
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    user = CurrentUser;
+                }
+                else
+                {
+                    user = userRepository.GetUserByName(User.Identity.Name);
+                }
+                orderProcessor.ProcessOrder(cart, user);
                 cart.Clear();
                 return View("Completed");
             }
