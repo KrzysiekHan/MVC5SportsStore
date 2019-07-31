@@ -84,6 +84,7 @@
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Entities\OrderHeader.cs" />
+    <Compile Include="Entities\OrderStatus.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
     <Compile Include="Entities\User.cs" />
@@ -99,6 +100,10 @@
     <Compile Include="Migrations\201907282046093_add UserRole to user entity.cs" />
     <Compile Include="Migrations\201907282046093_add UserRole to user entity.Designer.cs">
       <DependentUpon>201907282046093_add UserRole to user entity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907310512229_Order status.cs" />
+    <Compile Include="Migrations\201907310512229_Order status.Designer.cs">
+      <DependentUpon>201907310512229_Order status.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907282046093_add UserRole to user entity.resx">
       <DependentUpon>201907282046093_add UserRole to user entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907310512229_Order status.resx">
+      <DependentUpon>201907310512229_Order status.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

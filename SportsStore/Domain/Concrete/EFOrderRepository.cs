@@ -12,8 +12,13 @@ namespace Domain.Concrete
     public class EFOrderRepository : IOrderRepository
     {
         private EFDbContext context = new EFDbContext();
+
         public IEnumerable<OrderHeader> Orders { get {
-                return context.OrderHeaders;
+                return context.OrderHeaders.Include(x=>x.OrderStatus);
+            } }
+
+        public IEnumerable<OrderStatus> OrderStatuses { get {
+                return context.OrderStatuses;
             } }
 
         public OrderHeader DeleteOrder(int orderID)

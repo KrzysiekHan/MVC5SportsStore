@@ -20,6 +20,7 @@ namespace Domain.Concrete
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
 
 
     }

@@ -11,6 +11,8 @@ namespace Domain.Abstract
     {
         IEnumerable<OrderHeader> Orders { get; }
 
+        IEnumerable<OrderStatus> OrderStatuses { get; }
+
         void SaveOrder(OrderHeader product);
 
         OrderHeader DeleteOrder(int orderID);

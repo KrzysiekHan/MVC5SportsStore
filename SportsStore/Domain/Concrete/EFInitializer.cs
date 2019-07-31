@@ -14,7 +14,15 @@ namespace Domain.Concrete
         
         protected override void Seed(EFDbContext context)
         {
-            //initialize product list
+            #region OrderStatuses
+            IList<OrderStatus> orderStatus = new List<OrderStatus>();
+            orderStatus.Add(new OrderStatus { OrderStatusId = 1, Description = "Oczekujące na płatność" });
+            orderStatus.Add(new OrderStatus { OrderStatusId = 2, Description = "Kolekcjonowanie zamówienia" });
+            orderStatus.Add(new OrderStatus { OrderStatusId = 3, Description = "Pakowanie" });
+            orderStatus.Add(new OrderStatus { OrderStatusId = 4, Description = "Oczekiwanie na kuriera" });
+            orderStatus.Add(new OrderStatus { OrderStatusId = 5, Description = "Wysłane" });
+            context.OrderStatuses.AddRange(orderStatus);
+            #endregion
             #region Products
             IList<Product> products = new List<Product>();
             products.Add(new Product
@@ -57,9 +65,9 @@ namespace Domain.Concrete
                 ImageData = this.ImageToArray("bramka.jpg"),
                 ImageMimeType = "image/jpeg"
             });
-
+            context.Products.AddRange(products);
             #endregion
-
+            #region Users
             UserDetail userDetail = new UserDetail()
             {
                 ID = 1,
@@ -82,9 +90,8 @@ namespace Domain.Concrete
                 UserDetail = userDetail,
                 UserRole = "admin"
             });
+            #endregion
 
-
-            context.Products.AddRange(products);
             base.Seed(context);
         }
 

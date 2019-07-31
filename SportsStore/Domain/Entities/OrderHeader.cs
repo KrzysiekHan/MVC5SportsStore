@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Domain.Entities
 {
     public class OrderHeader
     {
+
         public int Id { get; set; }
 
         public DateTime CreationDate { get; set; }
@@ -18,10 +20,11 @@ namespace Domain.Entities
         public int CustomerId { get; set; }
 
         public string ShipAddress { get; set; }
+        
+        public int OrderStatusId { get; set; }
+        public OrderStatus OrderStatus { get; set; }
 
         public string ShipmentMethod { get; set; }
-
-        public string Status { get; set; }
 
         public string Comment { get; set; }
 

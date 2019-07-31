@@ -26,7 +26,7 @@ namespace Domain.Concrete
                 CreationDate = DateTime.Now,
                 ShipAddress = address.ToString(),
                 ShipmentMethod = "default",
-                Status = "Ordered",
+                OrderStatusId = 1,
                 //TODO Comment = shippingInfo.GiftWrap ? "Gift wrap" : "",
                 TotalDue = cart.ComputeTotalValue(),
                 OrderDetail = new List<OrderDetail>()

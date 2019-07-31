@@ -4,8 +4,6 @@
     ViewBag.Title = "List";
 }
 
-
-
         <h2>Lista zamówień</h2>
         <table class="table table-striped table-condensed table-bordered">
             <tr>
@@ -21,13 +19,13 @@
                 <tr>
                     <td>@item.CreationDate </td>
                     <td>@item.ShipAddress </td>
-                    <td>@item.Status </td>
+                    <td>@item.OrderStatus.Description </td>
                     <td>@item.Comment </td>
                     <td>@string.Format("{0:C2}",item.TotalDue) </td>
-                    <td>
-                        <a href="@Url.Action("Details",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Szczegóły"><span class="glyphicon glyphicon-search"></span></a>
-                        <a href="@Url.Action("Edit",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Zmiana zamówienia"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-default" data-toggle="tooltip" title="Anuluj zamówienie"><span class="glyphicon glyphicon-remove"></span></a>
+                    <td>                     
+                            <a href="@Url.Action("Details",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Szczegóły"><span class="glyphicon glyphicon-search"></span></a>
+                            <a href="@Url.Action("Edit",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Zmiana zamówienia"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="btn btn-default" data-toggle="tooltip" title="Anuluj zamówienie"><span class="glyphicon glyphicon-remove"></span></a>                    
                     </td>
                 </tr>
             }

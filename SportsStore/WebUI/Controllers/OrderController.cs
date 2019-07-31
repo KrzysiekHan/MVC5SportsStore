@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebUI.Models;
+using WebUI.Models.Orders;
 
 namespace WebUI.Controllers
 {
@@ -53,9 +54,13 @@ namespace WebUI.Controllers
         {
             var user = _userRepository.GetUserByName(User.Identity.Name);
             string userRole = user.UserRole ?? "default"; 
+     
             if (Id != null && userRole.Equals("admin"))
             {
-                var model = repository.Orders.Where(x => x.Id == Id).SingleOrDefault();
+                OrderEditViewModel model = new OrderEditViewModel();
+                model.Order = repository.Orders.Where(x => x.Id == Id).SingleOrDefault();
+                ViewBag.OrderStatus = new SelectList(repository.OrderStatuses, "OrderStatusId", "Description", model.Order.OrderStatusId);
+                model.OrderId = (int)Id;
                 return View(model);
             }
             else
@@ -65,13 +70,28 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit (OrderHeader orderHeader)
+        public ActionResult Edit (OrderEditViewModel order)
         {
             if (ModelState.IsValid)
             {
-                repository.SaveOrder(orderHeader);
+                OrderHeader Order = repository.Orders.Where(x => x.Id == order.OrderId).SingleOrDefault();
+                Order.ModificationDate = DateTime.Now;
+                Order.OrderStatusId = int.Parse(order.OrderStatus);
+                repository.SaveOrder(Order);
             }
-            return View(orderHeader);
+            return RedirectToAction("List");
+        }
+
+        public List<SelectListItem> OrderStateList()
+        {
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+            selectListItems.Add(new SelectListItem() { Value = "-1", Text = "Wybierz status..." });
+            selectListItems.Add(new SelectListItem() { Value = "1", Text = "Oczekujące na płatność" });
+            selectListItems.Add(new SelectListItem() { Value = "2", Text = "Kolekcjonowanie zamówienia" });
+            selectListItems.Add(new SelectListItem() { Value = "3", Text = "Pakowanie" });
+            selectListItems.Add(new SelectListItem() { Value = "4", Text = "Oczekiwanie na kuriera" });
+            selectListItems.Add(new SelectListItem() { Value = "5", Text = "Wysłane" });
+            return selectListItems;
         }
 
     }

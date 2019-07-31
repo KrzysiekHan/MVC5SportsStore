@@ -1,10 +1,18 @@
 ﻿@model Domain.Entities.Cart
 
-<div class="navbar-right" >
-    @Html.ActionLink("Zamów", "Index", "Cart",
-        new { returnUrl = Request.Url.PathAndQuery },
-        new { @class = "btn btn-default navbar-btn" })
-</div>
+    <div class="navbar-right">
+        @if (@Model.Lines.Sum(x => x.Quantity) > 0)
+        {
+            @Html.ActionLink("  ", "Index", "Cart",
+         new { returnUrl = Request.Url.PathAndQuery },
+         new {
+             @class = "btn btn-default navbar-btn glyphicon glyphicon-shopping-cart",
+             @data_toggle="tooltip",
+             @title ="Przejdź do koszyka",
+             @data_placement="bottom"
+         })
+        }
+    </div>
 <div class="navbar-text navbar-right" style="margin-right:1vw;">
     <b>Twój koszyk:</b>
     @Model.Lines.Sum(x => x.Quantity) sztuk,

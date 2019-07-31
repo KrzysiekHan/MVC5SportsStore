@@ -21,11 +21,11 @@
         <div class="container">
             @if (!Request.RawUrl.Contains("Order"))
             {
-                <div id="categories" class="col-xs-3">
+                <div id="categories" class="col-lg-2">
                     @Html.Action("Menu", "Nav")
                 </div>
             }
-            <div class="col-xs-8">
+            <div class="col-lg-10">
                 @RenderBody()
             </div>
         </div>
