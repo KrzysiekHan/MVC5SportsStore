@@ -21,6 +21,7 @@ namespace Domain.Concrete
             orderStatus.Add(new OrderStatus { OrderStatusId = 3, Description = "Pakowanie" });
             orderStatus.Add(new OrderStatus { OrderStatusId = 4, Description = "Oczekiwanie na kuriera" });
             orderStatus.Add(new OrderStatus { OrderStatusId = 5, Description = "Wysłane" });
+            orderStatus.Add(new OrderStatus { OrderStatusId = 6, Description = "Anulowane" });
             context.OrderStatuses.AddRange(orderStatus);
             #endregion
             #region Products

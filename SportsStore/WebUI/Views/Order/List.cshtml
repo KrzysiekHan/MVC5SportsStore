@@ -16,18 +16,35 @@
             </tr>
             @foreach (var item in Model.Orders)
             {
-                <tr>
-                    <td>@item.CreationDate </td>
-                    <td>@item.ShipAddress </td>
-                    <td>@item.OrderStatus.Description </td>
-                    <td>@item.Comment </td>
-                    <td>@string.Format("{0:C2}",item.TotalDue) </td>
-                    <td>                     
+                if (item.OrderStatusId == 6)
+                {
+                    <tr class="bg-danger">
+                        <td>@item.CreationDate </td>
+                        <td>@item.ShipAddress </td>
+                        <td>@item.OrderStatus.Description </td>
+                        <td>@item.Comment </td>
+                        <td>@string.Format("{0:C2}", item.TotalDue) </td>
+                        <td>
+                            <a href="@Url.Action("Details",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Szczegóły"><span class="glyphicon glyphicon-search"></span></a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@item.CreationDate </td>
+                        <td>@item.ShipAddress </td>
+                        <td>@item.OrderStatus.Description </td>
+                        <td>@item.Comment </td>
+                        <td>@string.Format("{0:C2}", item.TotalDue) </td>
+                        <td>
                             <a href="@Url.Action("Details",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Szczegóły"><span class="glyphicon glyphicon-search"></span></a>
                             <a href="@Url.Action("Edit",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Zmiana zamówienia"><span class="glyphicon glyphicon-edit"></span></a>
-                            <a class="btn btn-default" data-toggle="tooltip" title="Anuluj zamówienie"><span class="glyphicon glyphicon-remove"></span></a>                    
-                    </td>
-                </tr>
+                            <a href="@Url.Action("Delete",new { Id = item.Id})" class="btn btn-default" data-toggle="tooltip" title="Anuluj zamówienie"><span class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    </tr>
+                }
+
             }
         </table>
 

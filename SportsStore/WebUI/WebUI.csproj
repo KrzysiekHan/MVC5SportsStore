@@ -166,6 +166,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Models\Orders\OrderDeleteViewModel.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,6 +219,7 @@
     <Content Include="Views\Account\RegisterSummary.cshtml" />
     <Content Include="Views\Shared\_LayoutPageEmpty.cshtml" />
     <Content Include="Views\Order\Edit.cshtml" />
+    <Content Include="Views\Order\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

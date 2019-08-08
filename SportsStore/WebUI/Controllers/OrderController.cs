@@ -68,7 +68,7 @@ namespace WebUI.Controllers
             {
                 OrderEditViewModel model = new OrderEditViewModel();
                 model.Order = repository.Orders.Where(x => x.Id == Id).SingleOrDefault();
-                ViewBag.OrderStatus = new SelectList(repository.OrderStatuses, "OrderStatusId", "Description", model.Order.OrderStatusId);
+                ViewBag.OrderStatus = new SelectList(repository.OrderStatuses.Where(x=>x.OrderStatusId!=6), "OrderStatusId", "Description", model.Order.OrderStatusId);
                 model.OrderId = (int)Id;
                 return View(model);
             }
@@ -91,17 +91,35 @@ namespace WebUI.Controllers
             return RedirectToAction("List");
         }
 
-        public List<SelectListItem> OrderStateList()
+        [HttpGet]
+        public ActionResult Delete(int? Id)
         {
-            List<SelectListItem> selectListItems = new List<SelectListItem>();
-            selectListItems.Add(new SelectListItem() { Value = "-1", Text = "Wybierz status..." });
-            selectListItems.Add(new SelectListItem() { Value = "1", Text = "Oczekujące na płatność" });
-            selectListItems.Add(new SelectListItem() { Value = "2", Text = "Kolekcjonowanie zamówienia" });
-            selectListItems.Add(new SelectListItem() { Value = "3", Text = "Pakowanie" });
-            selectListItems.Add(new SelectListItem() { Value = "4", Text = "Oczekiwanie na kuriera" });
-            selectListItems.Add(new SelectListItem() { Value = "5", Text = "Wysłane" });
-            return selectListItems;
+            var user = _userRepository.GetUserByName(User.Identity.Name);
+            string userRole = user.UserRole ?? "default";
+
+            if (Id != null && userRole.Equals("admin"))
+            {
+                OrderDeleteViewModel model = new OrderDeleteViewModel();
+                model.Order = repository.Orders.Where(x => x.Id == Id).SingleOrDefault();
+                return View(model);
+            }
+            else
+            {
+                return new HttpUnauthorizedResult();
+            }
         }
+
+        [HttpPost]
+        public ActionResult Delete(int Id)
+        {
+            OrderHeader Order = repository.Orders.Where(x => x.Id == Id).SingleOrDefault();
+            Order.ModificationDate = DateTime.Now;
+            Order.OrderStatusId = 6;
+            repository.SaveOrder(Order);
+            return RedirectToAction("List");
+        }
+
+
 
     }
 }

@@ -8,30 +8,38 @@
     <div>
         <h2>Szczegóły Zamówienia nr @Model.orderHeader.Id</h2>
         <hr />
-        <table class="table table-striped table-condensed table-bordered">
-            <tr>
-                <th>Produkt</th>
-                <th>Ilość</th>
-                <th>Cena jednostkowa</th>
-                <th>Rabat</th>
-            </tr>
+        @if (Model.orderHeader.OrderStatusId == 6)
+        {
+            <h1>Zamówienie anulowane</h1>
+        }
+        else
+        {
+            <table class="table table-striped table-condensed table-bordered">
+                <tr>
+                    <th>Produkt</th>
+                    <th>Ilość</th>
+                    <th>Cena jednostkowa</th>
+                    <th>Rabat</th>
+                </tr>
 
-            @foreach (var item in @Model.orderHeader.OrderDetail)
-            {
-        <tr>
-            <td>@item.Product.Name</td>
-            <td>@item.Quantity</td>
-            <td>@string.Format("{0:C2}",item.UnitPrice)</td>
-            <td>@string.Format("{0:P2}",item.UnitPriceDiscount)</td>
-        </tr>
-             }
-        <tr class="bg-primary">
-            <td><b>Razem</b></td>
-            <td>@Model.orderHeader.OrderDetail.Sum(x=>x.Quantity)</td>
-            <td>@string.Format("{0:C}",Model.orderHeader.OrderDetail.Sum(x=>x.UnitPrice))</td>
-            <td></td>
-        </tr> 
+                @foreach (var item in @Model.orderHeader.OrderDetail)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@string.Format("{0:C2}", item.UnitPrice)</td>
+                        <td>@string.Format("{0:P2}", item.UnitPriceDiscount)</td>
+                    </tr>
+                }
+                <tr class="bg-primary">
+                    <td><b>Razem</b></td>
+                    <td>@Model.orderHeader.OrderDetail.Sum(x => x.Quantity)</td>
+                    <td>@string.Format("{0:C}", Model.orderHeader.OrderDetail.Sum(x => x.UnitPrice))</td>
+                    <td></td>
+                </tr>
             </table>
+        }
+
     </div>
 <p>
     @Html.ActionLink("Powrót do listy zakupów", "List","Order", new { @class ="btn btn-default"})

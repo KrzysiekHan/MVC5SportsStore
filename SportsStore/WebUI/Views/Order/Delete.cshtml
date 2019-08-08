@@ -1,0 +1,80 @@
+﻿@model WebUI.Models.Orders.OrderDeleteViewModel
+
+@{
+    ViewBag.Title = "Anulowanie";
+}
+
+<h3>Czy na pewno chcesz anulować to zamówienie?</h3>
+<div>
+    <h4>OrderHeader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.ModificationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.ModificationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.ShipAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.ShipAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.ShipmentMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.ShipmentMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order.TotalDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order.TotalDue)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("Id", Model.Order.Id)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
