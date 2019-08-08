@@ -7,8 +7,10 @@ Learning project based on Adam Freeman Pro ASP.NET MVC 5 extended with custom fe
 * Order history
 * Order management
 * Modified navbar
+* Order cancelation 
 
 ![mainsite](https://github.com/KrzysiekHan/MVC5SportsStore/blob/master/JPG/Main.JPG)
 ![order detail](https://github.com/KrzysiekHan/MVC5SportsStore/blob/master/JPG/orderdetail.JPG)
 ![edit](https://github.com/KrzysiekHan/MVC5SportsStore/blob/master/JPG/orderedit.JPG)
 ![list](https://github.com/KrzysiekHan/MVC5SportsStore/blob/master/JPG/orderlist.JPG)
+![cancelation](https://github.com/KrzysiekHan/MVC5SportsStore/blob/master/JPG/cancelation.JPG)
